@@ -1,0 +1,118 @@
+/* Common styles */
+
+body {
+  width: 500px;
+  margin: 0 auto;
+  margin-top: 20px;
+  font-family: 'Helvetica';
+  font-size: 2.2rem;
+  user-select: none;
+}
+
+.calculator {
+  padding: 20px;
+  box-shadow: 0px 1px 10px 2px rgba(0, 0, 0, 0.2);
+  border-radius: 5px;
+}
+
+/* Input field */
+
+.input {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  height: 60px;
+  width: 90%;
+  margin: 0 auto;
+  margin-top: 15px;
+  margin-bottom: 20px;
+  padding-top: 10px;
+  text-align: right;
+  font-size: 2.5rem;
+  overflow-x: auto;
+  transition: all 0.2s ease-in-out;
+}
+
+.input:hover {
+  border: 1px solid #9a9a9a;
+}
+
+/* Buttons */
+
+.buttons-block {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.calc-row-block {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-evenly;
+  margin-bottom: 15px;
+}
+
+.buttons div {
+  align-content: center;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  width: 60px;
+  height: 60px;
+  text-align: center;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #ddd;
+  transition:
+    border-color 0.2s ease-in-out,
+    background-color 0.2s,
+    box-shadow 0.2s;
+}
+
+.buttons div:hover {
+  background-color: #f1f1f1;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-color: #bbb;
+}
+
+.buttons div:active {
+  font-weight: bold;
+}
+
+/* Specific buttons */
+
+.buttons .clear {
+  color: white;
+  background-color: #bc1515;
+  border: 1px solid transparent;
+}
+
+.buttons .operation {
+  color: white;
+  background-color: #3a78c2;
+  border: 1px solid transparent;
+}
+
+.buttons .equal {
+  width: 170px;
+  color: white;
+  background-color: #3daf8a;
+  border: 1px solid transparent;
+}
+
+.buttons .clear:hover {
+  background-color: #8d1212;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-color: #8d1212;
+}
+
+.buttons .operation:hover {
+  background-color: #124786;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-color: #124786;
+}
+
+.buttons .equal:hover {
+  background-color: #278e6d;
+  box-shadow: 0px 0px 8px 0px rgba(0, 0, 0, 0.2);
+  border-color: #278e6d;
+}

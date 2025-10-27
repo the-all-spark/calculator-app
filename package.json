@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint .",
     "lint:fix": "eslint --fix .",
-    "format:check": "prettier --check .",
+    "format": "prettier --check .",
     "format:fix": "prettier --write ."
   },
   "author": "Anna German",
