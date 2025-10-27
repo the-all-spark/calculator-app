@@ -1,0 +1,21 @@
+{
+  "name": "calculator-app",
+  "version": "1.0.0",
+  "description": "Calculator application",
+  "main": "index.html",
+  "scripts": {
+    "lint": "eslint .",
+    "lint:fix": "eslint --fix .",
+    "format:check": "prettier --check .",
+    "format:fix": "prettier --write ."
+  },
+  "author": "Anna German",
+  "license": "ISC",
+  "devDependencies": {
+    "@eslint/js": "^9.38.0",
+    "eslint": "^9.38.0",
+    "eslint-config-prettier": "^10.1.8",
+    "globals": "^16.4.0",
+    "prettier": "3.6.2"
+  }
+}
