@@ -1,19 +1,21 @@
-const input = document.getElementById('input'); // input button
-const numbers = document.querySelectorAll('.number'); // number buttons
-const dotBtn = document.querySelector('.dot'); // dot button
-const changeSignBtn = document.querySelector('.change-sign'); // change sign button
-const result = document.getElementById('result'); // equal button
-const clear = document.getElementsByClassName('clear')[0]; // clear button
+const input = document.getElementById('input');
 
-let isResultDisplayed = false; // flag to check is output displayed
+const numbers = document.querySelectorAll('.number');
+const dotBtn = document.querySelector('.dot');
+const changeSignBtn = document.querySelector('.change-sign');
+
+const result = document.getElementById('result');
+let isResultDisplayed = false;
 const currentOperation = document.querySelector('.current-operation');
 
-const operations = document.querySelectorAll('.operation'); // operation buttons
+const clear = document.getElementsByClassName('clear')[0];
+
+const operations = document.querySelectorAll('.operation');
 const operationsArr = ['+', '-', '×', '÷', '%'];
 
 // function to change font size of input string
 function changeInputFontSize() {
-  if (input.innerHTML.length >= 12 && input.innerHTML.length <= 15) {
+  if (input.innerHTML.length >= 11 && input.innerHTML.length < 14) {
     input.style.fontSize = '2.5rem';
     input.style.lineHeight = '1.5';
   } else {
@@ -25,55 +27,51 @@ function changeInputFontSize() {
 // * Adding click handlers to number buttons
 
 for (let i = 0; i < numbers.length; i++) {
-  numbers[i].addEventListener('click', function (e) {
-    // handle initial input
-    if (input.innerHTML === '0') {
-      input.innerHTML = '';
-    }
+  numbers[i].addEventListener('click', (e) => handleNumberButtonClick(e));
+}
 
-    const currentString = input.innerHTML;
-    const lastChar = currentString[currentString.length - 1];
+function handleNumberButtonClick(e) {
+  // handle initial input
+  if (input.innerHTML === '0') {
+    input.innerHTML = '';
+  }
 
-    // result is not displayed -> add the new input to the input string
-    if (!isResultDisplayed) {
-      input.innerHTML += e.target.innerHTML;
-    } else if (isResultDisplayed && operationsArr.includes(lastChar)) {
-      // result is displayed and user pressed an operation -> keep on adding to the string for next operation
-      isResultDisplayed = false;
-      input.innerHTML += e.target.innerHTML;
-    } else {
-      // result is  displayed and user pressed a number -> clear the input string and add the new input to start the new operation
-      isResultDisplayed = false;
-      input.innerHTML = '';
-      input.innerHTML += e.target.innerHTML;
-    }
+  const currentString = input.innerHTML;
+  const lastChar = currentString[currentString.length - 1];
 
-    if (input.innerHTML.length >= 12) {
-      console.log('меняем размер при наборе текста');
-      changeInputFontSize();
-    }
-  });
+  if (!isResultDisplayed) {
+    input.innerHTML += e.target.innerHTML;
+  } else if (operationsArr.includes(lastChar)) {
+    input.innerHTML += e.target.innerHTML;
+    isResultDisplayed = false;
+  } else {
+    input.innerHTML = '';
+    input.innerHTML += e.target.innerHTML;
+    isResultDisplayed = false;
+  }
+
+  if (input.innerHTML.length >= 11) {
+    changeInputFontSize();
+  }
 }
 
 // * Adding click handlers to operation buttons
 
 for (let i = 0; i < operations.length; i++) {
-  operations[i].addEventListener('click', function (e) {
-    const currentString = input.innerHTML;
-    const lastChar = currentString[currentString.length - 1];
-    const clickedOperator = e.target.textContent;
+  operations[i].addEventListener('click', (e) => handleOperationButtonClick(e));
+}
 
-    if (operationsArr.includes(lastChar)) {
-      //console.log('Replacing operator');
-      const newString = currentString.substring(0, currentString.length - 1) + clickedOperator;
-      input.innerHTML = newString;
-    } else if (currentString.length === 0) {
-      console.log('Enter a number first'); //TODO: add error message?
-    } else {
-      //console.log('Adding operator');
-      input.innerHTML += clickedOperator;
-    }
-  });
+function handleOperationButtonClick(e) {
+  const currentString = input.innerHTML;
+  const lastChar = currentString[currentString.length - 1];
+  const clickedOperator = e.target.textContent;
+
+  if (operationsArr.includes(lastChar)) {
+    const newString = currentString.substring(0, currentString.length - 1) + clickedOperator;
+    input.innerHTML = newString;
+  } else {
+    input.innerHTML += clickedOperator;
+  }
 }
 
 // * Clearing the input (AC button)
@@ -155,18 +153,13 @@ function preciseCalculation(number, decimals = 10) {
 result.addEventListener('click', function () {
   const inputString = input.innerHTML;
 
-  const numbers = inputString.split(/\+|-|×|÷|%/g); // array of numbers
-  const operators = inputString.replace(/[0-9]|\./g, '').split(''); // array of operations
+  const numbers = inputString.split(/\+|-|×|÷|%/g);
+  const operators = inputString.replace(/[0-9]|\./g, '').split('');
 
   // if the first number is a negative number
   if (inputString.indexOf('-') === 0) {
     numbers[0] = '0';
   }
-
-  console.log(inputString);
-  console.log(operators);
-  console.log(numbers);
-  console.log('----------------------------');
 
   // show current operation
   currentOperation.innerHTML = `${inputString}=`;
@@ -223,11 +216,7 @@ result.addEventListener('click', function () {
 
   input.innerHTML = numbers[0];
 
-  //console.log(input.innerHTML); //!
-  //console.log(input.innerHTML.length); //!
-
-  if (input.innerHTML.length >= 12) {
-    console.log('меняем размер шрифта при выводе результата');
+  if (input.innerHTML.length >= 11) {
     changeInputFontSize();
   } else {
     input.style.fontSize = '';
