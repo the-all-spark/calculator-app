@@ -22,6 +22,11 @@ function changeInputFontSize() {
 
 for (let i = 0; i < numbers.length; i++) {
   numbers[i].addEventListener('click', function (e) {
+    // handle initial input
+    if (input.innerHTML === '0') {
+      input.innerHTML = '';
+    }
+
     const currentString = input.innerHTML;
     const lastChar = currentString[currentString.length - 1];
 
@@ -71,7 +76,7 @@ for (let i = 0; i < operations.length; i++) {
 
 clear.addEventListener('click', function () {
   input.style.fontSize = '';
-  input.innerHTML = ''; //! '' or '0'
+  input.innerHTML = '0'; //! '' or '0'
 });
 
 // * Changing sign (change sign button)
