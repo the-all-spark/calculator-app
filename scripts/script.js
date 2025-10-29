@@ -69,6 +69,12 @@ changeSignBtn.addEventListener('click', function () {
 
 // * Displaying the result (equal button)
 
+/* function to calculate the result of the operation
+  @param numberArr - array of numbers
+  @param index - index of the first operand
+  @param operator - operator
+  @returns result of the operation 
+*/
 function calculateNumber(numberArr, index, operator) {
   switch (operator) {
     case '×':
@@ -86,13 +92,37 @@ function calculateNumber(numberArr, index, operator) {
   }
 }
 
+/* function to check number:
+  @param number - number to check / precise
+  @returns number or precise number
+*/
+function checkNumberToPrecise(number) {
+  const needToPrecise = number.toString().includes('.') && number.toString().length > 10;
+
+  if (needToPrecise) {
+    return preciseCalculation(number);
+  } else {
+    return number;
+  }
+}
+
+/*function to calculate the precise result
+  @param number - number to calculate
+  @param decimals - number of decimals
+  @returns precise number
+*/
+function preciseCalculation(number, decimals = 10) {
+  return parseFloat(number.toFixed(decimals));
+}
+
 result.addEventListener('click', function () {
   const inputString = input.innerHTML;
 
   const numbers = inputString.split(/\+|-|×|÷|%/g); // array of numbers
   const operators = inputString.replace(/[0-9]|\./g, '').split(''); // array of operations
 
-  if (operators.indexOf('-') == 0) {
+  // if the first number is a negative number
+  if (inputString.indexOf('-') === 0) {
     numbers[0] = '0';
   }
 
@@ -103,39 +133,67 @@ result.addEventListener('click', function () {
 
   let divideIndex = operators.indexOf('÷');
   while (divideIndex != -1) {
-    numbers.splice(divideIndex, 2, calculateNumber(numbers, divideIndex, '÷'));
+    let resultNumber = calculateNumber(numbers, divideIndex, '÷');
+    resultNumber = checkNumberToPrecise(resultNumber);
+
+    numbers.splice(divideIndex, 2, resultNumber);
     operators.splice(divideIndex, 1);
     divideIndex = operators.indexOf('÷');
   }
 
   let multiplyIndex = operators.indexOf('×');
   while (multiplyIndex != -1) {
-    numbers.splice(multiplyIndex, 2, calculateNumber(numbers, multiplyIndex, '×'));
+    let resultNumber = calculateNumber(numbers, multiplyIndex, '×');
+    resultNumber = checkNumberToPrecise(resultNumber);
+
+    numbers.splice(multiplyIndex, 2, resultNumber);
     operators.splice(multiplyIndex, 1);
     multiplyIndex = operators.indexOf('×');
   }
 
   let percentIndex = operators.indexOf('%');
   while (percentIndex != -1) {
-    numbers.splice(percentIndex, 2, calculateNumber(numbers, percentIndex, '%'));
+    let resultNumber = calculateNumber(numbers, percentIndex, '%');
+    resultNumber = checkNumberToPrecise(resultNumber);
+
+    numbers.splice(percentIndex, 2, resultNumber);
     operators.splice(percentIndex, 1);
     percentIndex = operators.indexOf('%');
   }
 
   let subtractIndex = operators.indexOf('-');
   while (subtractIndex != -1) {
-    numbers.splice(subtractIndex, 2, calculateNumber(numbers, subtractIndex, '-'));
+    let resultNumber = calculateNumber(numbers, subtractIndex, '-');
+    resultNumber = checkNumberToPrecise(resultNumber);
+
+    numbers.splice(subtractIndex, 2, resultNumber);
     operators.splice(subtractIndex, 1);
     subtractIndex = operators.indexOf('-');
   }
 
   let addIndex = operators.indexOf('+');
   while (addIndex != -1) {
-    numbers.splice(addIndex, 2, calculateNumber(numbers, addIndex, '+'));
+    let resultNumber = calculateNumber(numbers, addIndex, '+');
+    resultNumber = checkNumberToPrecise(resultNumber);
+
+    numbers.splice(addIndex, 2, resultNumber);
     operators.splice(addIndex, 1);
     addIndex = operators.indexOf('+');
   }
 
   input.innerHTML = numbers[0];
   isResultDisplayed = true;
+});
+
+// * Adding click handlers to dot button
+
+dotBtn.addEventListener('click', function () {
+  const inputString = input.innerHTML;
+
+  const numberArr = inputString.split(/\+|-|×|÷|%/g);
+  const prevChar = numberArr[numberArr.length - 1];
+
+  if (inputString.length !== 0 && !prevChar.includes('.')) {
+    input.innerHTML += '.';
+  }
 });
