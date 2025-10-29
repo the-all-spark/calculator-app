@@ -9,7 +9,14 @@ let isResultDisplayed = false; // flag to check is output displayed
 const operations = document.querySelectorAll('.operation'); // operation buttons
 const operationsArr = ['+', '-', '×', '÷', '%'];
 
-console.log(dotBtn);
+// function to change font size of input string
+function changeInputFontSize() {
+  if (input.innerHTML.length > 12 && input.innerHTML.length <= 15) {
+    input.style.fontSize = '2.5rem';
+  } else {
+    input.style.fontSize = '2rem';
+  }
+}
 
 // * Adding click handlers to number buttons
 
@@ -30,6 +37,11 @@ for (let i = 0; i < numbers.length; i++) {
       isResultDisplayed = false;
       input.innerHTML = '';
       input.innerHTML += e.target.innerHTML;
+    }
+
+    if (input.innerHTML.length > 12) {
+      console.log('меняем размер при наборе текста');
+      changeInputFontSize();
     }
   });
 }
@@ -58,6 +70,7 @@ for (let i = 0; i < operations.length; i++) {
 // * Clearing the input (AC button)
 
 clear.addEventListener('click', function () {
+  input.style.fontSize = '';
   input.innerHTML = ''; //! '' or '0'
 });
 
@@ -65,6 +78,19 @@ clear.addEventListener('click', function () {
 
 changeSignBtn.addEventListener('click', function () {
   input.innerHTML = input.innerHTML * -1;
+});
+
+// * Adding click handlers to dot button
+
+dotBtn.addEventListener('click', function () {
+  const inputString = input.innerHTML;
+
+  const numberArr = inputString.split(/\+|-|×|÷|%/g);
+  const prevChar = numberArr[numberArr.length - 1];
+
+  if (inputString.length !== 0 && !prevChar.includes('.')) {
+    input.innerHTML += '.';
+  }
 });
 
 // * Displaying the result (equal button)
@@ -182,18 +208,16 @@ result.addEventListener('click', function () {
   }
 
   input.innerHTML = numbers[0];
-  isResultDisplayed = true;
-});
 
-// * Adding click handlers to dot button
+  //console.log(input.innerHTML); //!
+  //console.log(input.innerHTML.length); //!
 
-dotBtn.addEventListener('click', function () {
-  const inputString = input.innerHTML;
-
-  const numberArr = inputString.split(/\+|-|×|÷|%/g);
-  const prevChar = numberArr[numberArr.length - 1];
-
-  if (inputString.length !== 0 && !prevChar.includes('.')) {
-    input.innerHTML += '.';
+  if (input.innerHTML.length > 12) {
+    console.log('меняем размер шрифта при выводе результата');
+    changeInputFontSize();
+  } else {
+    input.style.fontSize = '';
   }
+
+  isResultDisplayed = true;
 });
