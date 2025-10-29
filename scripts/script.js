@@ -4,17 +4,21 @@ const dotBtn = document.querySelector('.dot'); // dot button
 const changeSignBtn = document.querySelector('.change-sign'); // change sign button
 const result = document.getElementById('result'); // equal button
 const clear = document.getElementsByClassName('clear')[0]; // clear button
+
 let isResultDisplayed = false; // flag to check is output displayed
+const currentOperation = document.querySelector('.current-operation');
 
 const operations = document.querySelectorAll('.operation'); // operation buttons
 const operationsArr = ['+', '-', '×', '÷', '%'];
 
 // function to change font size of input string
 function changeInputFontSize() {
-  if (input.innerHTML.length > 12 && input.innerHTML.length <= 15) {
+  if (input.innerHTML.length >= 12 && input.innerHTML.length <= 15) {
     input.style.fontSize = '2.5rem';
+    input.style.lineHeight = '1.5';
   } else {
     input.style.fontSize = '2rem';
+    input.style.lineHeight = '1.8';
   }
 }
 
@@ -44,7 +48,7 @@ for (let i = 0; i < numbers.length; i++) {
       input.innerHTML += e.target.innerHTML;
     }
 
-    if (input.innerHTML.length > 12) {
+    if (input.innerHTML.length >= 12) {
       console.log('меняем размер при наборе текста');
       changeInputFontSize();
     }
@@ -76,7 +80,9 @@ for (let i = 0; i < operations.length; i++) {
 
 clear.addEventListener('click', function () {
   input.style.fontSize = '';
-  input.innerHTML = '0'; //! '' or '0'
+  input.style.lineHeight = '';
+  input.innerHTML = '0';
+  currentOperation.innerHTML = 'Current operation:';
 });
 
 // * Changing sign (change sign button)
@@ -162,6 +168,9 @@ result.addEventListener('click', function () {
   console.log(numbers);
   console.log('----------------------------');
 
+  // show current operation
+  currentOperation.innerHTML = `${inputString}=`;
+
   let divideIndex = operators.indexOf('÷');
   while (divideIndex != -1) {
     let resultNumber = calculateNumber(numbers, divideIndex, '÷');
@@ -217,11 +226,12 @@ result.addEventListener('click', function () {
   //console.log(input.innerHTML); //!
   //console.log(input.innerHTML.length); //!
 
-  if (input.innerHTML.length > 12) {
+  if (input.innerHTML.length >= 12) {
     console.log('меняем размер шрифта при выводе результата');
     changeInputFontSize();
   } else {
     input.style.fontSize = '';
+    input.style.lineHeight = '';
   }
 
   isResultDisplayed = true;

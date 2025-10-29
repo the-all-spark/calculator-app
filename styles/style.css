@@ -1,4 +1,4 @@
-/* Common styles */
+/* ----- Common styles ----- */
 
 body {
   width: 500px;
@@ -15,6 +15,21 @@ body {
   border-radius: 5px;
 }
 
+/* ----- Input block ----- */
+.input-block {
+  position: relative;
+}
+
+/* Current operation */
+
+.current-operation {
+  font-size: 1rem;
+  color: grey;
+  position: absolute;
+  top: 10px;
+  left: 40px;
+}
+
 /* Input field */
 
 .input {
@@ -25,18 +40,19 @@ body {
   margin: 0 auto;
   margin-top: 15px;
   margin-bottom: 20px;
-  padding: 9px 10px 2px 0;
+  padding: 25px 10px 2px 0;
   text-align: right;
   font-size: 3rem;
   overflow-x: auto;
   transition: all 0.2s ease-in-out;
+  line-height: 1;
 }
 
 .input:hover {
   border: 1px solid #9a9a9a;
 }
 
-/* Buttons */
+/* ----- Buttons ----- */
 
 .buttons-block {
   width: 100%;
