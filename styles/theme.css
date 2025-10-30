@@ -13,19 +13,39 @@
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  border: 1px solid grey;
+  border: 2px solid grey;
   background-color: #fafafa;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 }
 
-.switch-theme-btn:hover {
-  background-color: rgb(192, 221, 241);
-  border: 1px solid rgb(192, 221, 241);
+/* Angle icons */
+
+.angle-icon {
+  display: none;
+  position: absolute;
+  top: 0px;
+  z-index: 10;
 }
 
-.switch-theme-btn:active {
-  background-color: #bbb;
+.angle-icon svg path {
+  stroke: #3daf8a;
+}
+
+.angle-icon-right {
+  left: 17px;
+}
+
+.angle-icon-left {
+  left: 15px;
+}
+
+.angle-icon:hover {
+  cursor: pointer;
+}
+
+.angle-icon.shown-block {
+  display: block;
 }
 
 /* Theme variants block */
@@ -61,7 +81,6 @@
 }
 
 .theme-variant:not(.theme-variant[selected='true']):hover {
-  border: 2px solid #bc1515;
   cursor: pointer;
 }
 
