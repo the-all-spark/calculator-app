@@ -102,6 +102,7 @@ function changeTheme(e) {
   hideThemeVariantsBlock();
   updateBorderColor();
   showCurrentTheme(variant);
+  changeCalculatorColorScheme(theme);
 }
 
 // Remove attribute 'selected' from all theme variants
@@ -122,4 +123,10 @@ function hideThemeVariantsBlock() {
 // Change switch theme button style
 function showCurrentTheme(variant) {
   switchThemeBtn.setAttribute('data-theme', variant.getAttribute('data-theme'));
+}
+
+// Change color scheme of calculator
+function changeCalculatorColorScheme(theme) {
+  const calculator = document.querySelector('.calculator');
+  calculator.setAttribute('data-calc-theme', theme);
 }

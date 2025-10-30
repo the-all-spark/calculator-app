@@ -100,11 +100,119 @@ div[data-theme='light-theme'] {
 }
 
 div[data-theme='dark-theme'] {
-  border: 2px solid #222222;
+  border: 2px solid #616161;
   background-color: #222222;
 }
 
 div[data-theme='blue-theme'] {
-  border: 2px solid #3a78c2;
+  border: 2px solid #afc9e8;
   background-color: #3a78c2;
+}
+
+div[data-theme='red-theme'] {
+  border: 2px solid #e8afaf;
+  background-color: #c23a3a;
+}
+
+/* ------ Calculator themes ------ */
+
+/* Dark theme */
+
+.calculator[data-calc-theme='dark-theme'] {
+  background-color: #222222;
+}
+
+.calculator[data-calc-theme='dark-theme'] .input {
+  color: white;
+}
+
+.calculator[data-calc-theme='dark-theme'] .current-operation {
+  color: #9c9c9c;
+}
+
+.calculator[data-calc-theme='dark-theme'] .buttons .operation,
+.calculator[data-calc-theme='dark-theme'] .buttons .change-sign {
+  background-color: #646464;
+}
+
+.calculator[data-calc-theme='dark-theme'] .number,
+.calculator[data-calc-theme='dark-theme'] .dot {
+  background-color: #aeaeae;
+}
+
+.calculator[data-calc-theme='dark-theme'] .buttons .clear {
+  background-color: #5a3d3e;
+}
+
+.calculator[data-calc-theme='dark-theme'] .buttons .equal {
+  background-color: #ffffff;
+  color: #000000;
+}
+
+/* Blue theme */
+
+.calculator[data-calc-theme='blue-theme'] {
+  background-color: #3a78c2;
+}
+
+.calculator[data-calc-theme='blue-theme'] .input {
+  color: white;
+}
+
+.calculator[data-calc-theme='blue-theme'] .current-operation {
+  color: #dcdcdc;
+}
+
+.calculator[data-calc-theme='blue-theme'] .buttons .operation,
+.calculator[data-calc-theme='blue-theme'] .buttons .change-sign {
+  background-color: #1e4d85;
+}
+
+.calculator[data-calc-theme='blue-theme'] .number,
+.calculator[data-calc-theme='blue-theme'] .dot {
+  background-color: #93bcec;
+  border: 1px solid #4770a0;
+}
+
+.calculator[data-calc-theme='blue-theme'] .buttons .clear {
+  background-color: #1d276d;
+}
+
+.calculator[data-calc-theme='blue-theme'] .buttons .equal {
+  background-color: #daedff;
+  color: #1d276d;
+}
+
+/* Red theme */
+
+.calculator[data-calc-theme='red-theme'] {
+  background-color: #c23a3a;
+}
+
+.calculator[data-calc-theme='red-theme'] .input {
+  color: white;
+}
+
+.calculator[data-calc-theme='red-theme'] .current-operation {
+  color: #dcdcdc;
+}
+
+.calculator[data-calc-theme='red-theme'] .buttons .operation,
+.calculator[data-calc-theme='red-theme'] .buttons .change-sign {
+  background-color: #ab0000;
+}
+
+.calculator[data-calc-theme='red-theme'] .number,
+.calculator[data-calc-theme='red-theme'] .dot {
+  background-color: #d79595;
+  border: 1px solid #e2bbbb;
+}
+
+.calculator[data-calc-theme='red-theme'] .buttons .clear {
+  background-color: #801111;
+}
+
+.calculator[data-calc-theme='red-theme'] .buttons .equal {
+  background-color: #ffd8d8;
+  color: #000000;
 }

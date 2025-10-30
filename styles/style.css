@@ -45,6 +45,7 @@ body {
   padding: 25px 10px 2px 0;
   text-align: right;
   font-size: 3rem;
+  color: #000000;
   overflow-x: auto;
   transition: all 0.2s ease-in-out;
   line-height: 1;
@@ -94,6 +95,11 @@ body {
 
 .buttons div:active {
   font-weight: bold;
+}
+
+.number,
+.dot {
+  color: #000000;
 }
 
 /* Specific buttons */
