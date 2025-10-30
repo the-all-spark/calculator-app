@@ -1,0 +1,91 @@
+/* ----- Switch theme ----- */
+
+.switch-theme-block {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 100;
+}
+
+.switch-theme-btn {
+  position: relative;
+  z-index: 2;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid grey;
+  background-color: #fafafa;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.switch-theme-btn:hover {
+  background-color: rgb(192, 221, 241);
+  border: 1px solid rgb(192, 221, 241);
+}
+
+.switch-theme-btn:active {
+  background-color: #bbb;
+}
+
+/* Theme variants block */
+
+.theme-variants-block {
+  display: none;
+  width: 50px;
+  flex-direction: column;
+  row-gap: 10px;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0px;
+  left: 15px;
+  z-index: 1;
+  border: 1px solid #bbb;
+  background-color: white;
+  border-radius: 10px;
+  padding: 10px 7px 10px 30px;
+}
+
+.theme-variants-block.shown-block {
+  display: flex;
+}
+
+.theme-variant {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+
+  transition: all 0.1s ease-in-out;
+}
+
+.theme-variant:not(.theme-variant[selected='true']):hover {
+  border: 2px solid #bc1515;
+  cursor: pointer;
+}
+
+.check-icon {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: -4px;
+  right: -10px;
+}
+
+/* Theme variants */
+
+div[data-theme='light-theme'] {
+  border: 2px solid grey;
+  background-color: #fafafa;
+}
+
+div[data-theme='dark-theme'] {
+  border: 2px solid #222222;
+  background-color: #222222;
+}
+
+div[data-theme='blue-theme'] {
+  border: 2px solid #3a78c2;
+  background-color: #3a78c2;
+}
