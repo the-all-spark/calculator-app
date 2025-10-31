@@ -55,7 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (!isResultDisplayed) {
       input.innerHTML += e.target.innerHTML;
-    } else if (operationsArr.includes(lastChar)) {
+    } else if (operationsArr.includes(lastChar) || input.innerHTML.includes('.')) {
       input.innerHTML += e.target.innerHTML;
       isResultDisplayed = false;
     } else {
