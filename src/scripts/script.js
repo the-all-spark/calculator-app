@@ -112,7 +112,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const numberArr = inputString.split(/\+|-|×|÷|%/g);
     const prevChar = numberArr[numberArr.length - 1];
 
-    if (inputString.length !== 0 && !prevChar.includes('.')) {
+    const lastChar = inputString[inputString.length - 1];
+    const isLastCharOperator = operationsArr.some((operator) => lastChar.includes(operator));
+
+    if (inputString.length !== 0 && !prevChar.includes('.') && !isLastCharOperator) {
       input.innerHTML += '.';
     }
   });
