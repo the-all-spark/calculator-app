@@ -1,6 +1,7 @@
 import '../styles/style.css';
 import '../styles/theme.css';
 import './theme.js';
+import './numpad.js';
 import favicon from '../assets/favicon.svg';
 
 document.addEventListener('DOMContentLoaded', function () {
