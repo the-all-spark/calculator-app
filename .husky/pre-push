@@ -1,6 +1,12 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+echo "Running ESLint check before push..."
 
-npm run pre-push-check
-
-exit 1
+if npx eslint . --max-warnings=0 --color; then
+    echo "✅ ESLint check passed! Pushing to GitHub..."
+    echo ""
+else
+    echo "❌ ESLint check failed! Fix errors before pushing to GitHub."
+    echo "   Run 'npm run lint:fix' to auto-fix some issues."
+    echo "   Or run 'npm run lint' to see all errors."
+    echo ""
+    exit 1
+fi
