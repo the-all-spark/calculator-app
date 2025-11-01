@@ -33,11 +33,15 @@ Application is available at the [address](https://the-all-spark.github.io/calcul
 
 ## Folders' and files' structure
 
-`` `src` `` (contains all files of the application):  
-`assets/` - contains all images and icons (.svg files)  
-`scripts/` - contains all scripts (.js files)  
-`styles/` - contains all styles (.css files)  
-`index.html` - the main application file
+`` `src` `` (contains all files of the application):
+
+- `assets/` - contains all images and icons (.svg files)
+- `scripts/` - contains all scripts (.js files):
+  `script.js` - main script file, `theme.js` - script for theme switching, `numpad.js` - script for interaction with keyboard
+- `styles/` - contains all styles (.css files)
+- `index.html` - the main application file
+
+`` `./husky/pre-push` `` - pre-push hook for [Husky](https://typicode.github.io/husky/)
 
 `README.md` - application's documentation  
 `.prettierrc.json`, `.eslint.config.mjs` - configuration files for [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) code formatters  
