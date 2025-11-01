@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.head.append(link);
   })();
 
-  var input = document.getElementById('input');
+  const input = document.getElementById('input');
 
   const numbers = document.querySelectorAll('.number');
   const dotBtn = document.querySelector('.dot');
