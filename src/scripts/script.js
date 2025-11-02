@@ -81,11 +81,14 @@ document.addEventListener('DOMContentLoaded', function () {
     const lastChar = currentString[currentString.length - 1];
     const clickedOperator = e.target.textContent;
 
-    if (operationsArr.includes(lastChar)) {
+    if (input.innerHTML === 'Error') {
+      input.innerHTML = '0';
+      currentOperation.innerHTML = 'Current operation:';
+    } else if (!operationsArr.includes(lastChar) && !lastChar.includes('.')) {
+      input.innerHTML += clickedOperator;
+    } else {
       const newString = currentString.substring(0, currentString.length - 1) + clickedOperator;
       input.innerHTML = newString;
-    } else {
-      input.innerHTML += clickedOperator;
     }
   }
 
@@ -115,7 +118,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const lastChar = inputString[inputString.length - 1];
     const isLastCharOperator = operationsArr.some((operator) => lastChar.includes(operator));
 
-    if (inputString.length !== 0 && !prevChar.includes('.') && !isLastCharOperator) {
+    if (input.innerHTML === 'Error') {
+      input.innerHTML = '0';
+      currentOperation.innerHTML = 'Current operation:';
+    } else if (inputString.length !== 0 && !prevChar.includes('.') && !isLastCharOperator) {
       input.innerHTML += '.';
     }
   });
@@ -233,6 +239,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     input.innerHTML = numbers[0];
+
+    if (isNaN(numbers[0]) || !Number.isFinite(numbers[0])) {
+      input.innerHTML = 'Error';
+    }
 
     if (input.innerHTML.length >= 11) {
       changeInputFontSize();
