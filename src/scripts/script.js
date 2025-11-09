@@ -28,6 +28,26 @@ document.addEventListener('DOMContentLoaded', function () {
   const operations = document.querySelectorAll('.operation');
   const operationsArr = ['+', '-', '×', '÷', '%'];
 
+  // function to get array of operators from input string
+  function getOperatorArray() {
+    const inputString = input.innerHTML;
+    return inputString.replace(/[0-9]|\./g, '').split('');
+  }
+
+  // function to get array of numbers from input string
+  function getNumberArray() {
+    const inputString = input.innerHTML;
+    return inputString.split(/\+|-|×|÷|%/g);
+  }
+
+  // function to clear input field
+  function clearInput() {
+    input.style.fontSize = '';
+    input.style.lineHeight = '';
+    input.innerHTML = '0';
+    currentOperation.innerHTML = 'Current operation:';
+  }
+
   // function to change font size of input string
   function changeInputFontSize() {
     if (input.innerHTML.length >= 11 && input.innerHTML.length < 14) {
@@ -82,9 +102,10 @@ document.addEventListener('DOMContentLoaded', function () {
     const clickedOperator = e.target.textContent;
 
     if (input.innerHTML === 'Error') {
-      input.innerHTML = '0';
-      currentOperation.innerHTML = 'Current operation:';
-    } else if (!operationsArr.includes(lastChar) && !lastChar.includes('.')) {
+      clearInput();
+    }
+
+    if (!operationsArr.includes(lastChar) && !lastChar.includes('.')) {
       input.innerHTML += clickedOperator;
     } else {
       const newString = currentString.substring(0, currentString.length - 1) + clickedOperator;
@@ -93,18 +114,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // * Clearing the input (AC button)
-
-  clear.addEventListener('click', function () {
-    input.style.fontSize = '';
-    input.style.lineHeight = '';
-    input.innerHTML = '0';
-    currentOperation.innerHTML = 'Current operation:';
-  });
+  clear.addEventListener('click', clearInput);
 
   // * Changing sign (change sign button)
 
   changeSignBtn.addEventListener('click', function () {
-    input.innerHTML = input.innerHTML * -1;
+    const inputString = input.innerHTML;
+    const operators = getOperatorArray();
+
+    if (operators.length === 0 || inputString[0] === '-') {
+      input.innerHTML = input.innerHTML * -1;
+    }
   });
 
   // * Adding click handlers to dot button
@@ -112,16 +132,17 @@ document.addEventListener('DOMContentLoaded', function () {
   dotBtn.addEventListener('click', function () {
     const inputString = input.innerHTML;
 
-    const numberArr = inputString.split(/\+|-|×|÷|%/g);
+    const numberArr = getNumberArray();
     const prevChar = numberArr[numberArr.length - 1];
 
     const lastChar = inputString[inputString.length - 1];
     const isLastCharOperator = operationsArr.some((operator) => lastChar.includes(operator));
 
     if (input.innerHTML === 'Error') {
-      input.innerHTML = '0';
-      currentOperation.innerHTML = 'Current operation:';
-    } else if (inputString.length !== 0 && !prevChar.includes('.') && !isLastCharOperator) {
+      clearInput();
+    }
+
+    if (inputString.length !== 0 && !prevChar.includes('.') && !isLastCharOperator) {
       input.innerHTML += '.';
     }
   });
@@ -177,17 +198,37 @@ document.addEventListener('DOMContentLoaded', function () {
   result.addEventListener('click', function () {
     const inputString = input.innerHTML;
 
-    const numbers = inputString.split(/\+|-|×|÷|%/g);
-    const operators = inputString.replace(/[0-9]|\./g, '').split('');
+    const numbers = getNumberArray();
+    const operators = getOperatorArray();
+
+    // show number while clicking equal button when there is only one number and no operations
+    if (numbers.length === 1 && operators.length === 0) {
+      input.innerHTML = numbers[0];
+    }
 
     // if the first number is a negative number
     if (inputString.indexOf('-') === 0) {
       numbers[0] = '0';
     }
 
-    // show current operation
-    currentOperation.innerHTML = `${inputString}=`;
+    // if the last number is an empty string
+    if (numbers[numbers.length - 1] === '') {
+      numbers.pop();
+      operators.pop();
+    }
 
+    // show current operation in special block
+    const lastChar = inputString[inputString.length - 1];
+    const isLastCharOperator = operationsArr.some((operator) => lastChar.includes(operator));
+
+    if (isLastCharOperator) {
+      const newString = inputString.slice(0, inputString.length - 1);
+      currentOperation.innerHTML = `${newString}=`;
+    } else {
+      currentOperation.innerHTML = `${inputString}=`;
+    }
+
+    // operations
     let divideIndex = operators.indexOf('÷');
     while (divideIndex != -1) {
       let resultNumber = calculateNumber(numbers, divideIndex, '÷');
@@ -240,7 +281,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     input.innerHTML = numbers[0];
 
-    if (isNaN(numbers[0]) || !Number.isFinite(numbers[0])) {
+    if (isNaN(numbers[0]) || !Number.isFinite(parseFloat(numbers[0]))) {
       input.innerHTML = 'Error';
     }
 
