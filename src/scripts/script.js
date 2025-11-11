@@ -118,12 +118,46 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // * Changing sign (change sign button)
 
-  changeSignBtn.addEventListener('click', function () {
-    const inputString = input.innerHTML;
-    const operators = getOperatorArray();
+  // function to make string from array of numbers and array of operators
+  // @param numbersArr - array of numbers
+  // @param operatorsArr - array of operators
+  // @returns new string
+  function makeNewString(numbersArr, operatorsArr) {
+    let newString = '';
+    for (let i = 0; i < numbersArr.length; i++) {
+      newString += numbersArr[i];
+      if (i < operatorsArr.length) {
+        newString += operatorsArr[i];
+      }
+    }
+    return newString;
+  }
 
-    if (operators.length === 0 || inputString[0] === '-') {
-      input.innerHTML = input.innerHTML * -1;
+  changeSignBtn.addEventListener('click', function () {
+    const operators = getOperatorArray();
+    const numbers = getNumberArray();
+
+    const isOneNumber =
+      numbers.length === 1 ||
+      (numbers.length > 1 && numbers.length <= 3 && (numbers[0] === '' || numbers[numbers.length - 1] === ''));
+
+    // only for one number and less than 2 operators
+    if (isOneNumber && operators.length <= 2) {
+      if (numbers.length === 1 || (numbers.length === 2 && numbers[0] === '')) {
+        input.innerHTML = input.innerHTML * -1;
+      } else if (numbers.length === 2 && numbers[numbers.length - 1] === '') {
+        numbers.unshift('');
+        operators.unshift('-');
+
+        const newString = makeNewString(numbers, operators);
+        input.innerHTML = newString;
+      } else {
+        numbers.shift();
+        operators.shift();
+
+        const newString = makeNewString(numbers, operators);
+        input.innerHTML = newString;
+      }
     }
   });
 
