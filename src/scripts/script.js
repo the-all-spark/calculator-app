@@ -28,19 +28,19 @@ document.addEventListener('DOMContentLoaded', function () {
   const operations = document.querySelectorAll('.operation');
   const operationsArr = ['+', '-', '×', '÷', '%'];
 
-  // function to get array of operators from input string
+  // get array of operators from input string
   function getOperatorArray() {
     const inputString = input.innerHTML;
     return inputString.replace(/[0-9]|\./g, '').split('');
   }
 
-  // function to get array of numbers from input string
+  // get array of numbers from input string
   function getNumberArray() {
     const inputString = input.innerHTML;
     return inputString.split(/\+|-|×|÷|%/g);
   }
 
-  // function to clear input field
+  // clear input field
   function clearInput() {
     input.style.fontSize = '';
     input.style.lineHeight = '';
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', function () {
     currentOperation.innerHTML = 'Current operation:';
   }
 
-  // function to change font size of input string
+  // change font size of input string
   function changeInputFontSize() {
     if (input.innerHTML.length >= 11 && input.innerHTML.length < 14) {
       input.style.fontSize = '2.5rem';

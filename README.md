@@ -1,6 +1,10 @@
-## Task
+# Calculator application
 
-[Link to the docs](https://docs.google.com/document/d/1zpXXeSae-BlcxPKgw3DhxZA92cspVailrPYoaXSYrW8/edit?tab=t.0#heading=h.5dt3hghpa22f)
+## Description
+
+Simple calculator with main operations, built using HTML, CSS, JS and Webpack.   
+Allows to switch color scheme. Uses `husky` to run ESLint checking before push.  
+Testing project.
 
 ## How to run the app
 
@@ -36,14 +40,13 @@ Application is available at the [address](https://the-all-spark.github.io/calcul
 `` `src` `` (contains all files of the application):
 
 - `assets/` - contains all images and icons (.svg files)
-- `scripts/` - contains all scripts (.js files):
-  `script.js` - main script file, `theme.js` - script for theme switching, `numpad.js` - script for interaction with keyboard
-- `styles/` - contains all styles (.css files)
+- `scripts/` - contains all scripts: `script.js` - main script file, `theme.js` - script for theme switching, `numpad.js` - script for interaction with keyboard
+- `styles/` - contains all styles
 - `index.html` - the main application file
 
 `` `./husky/pre-push` `` - pre-push hook for [Husky](https://typicode.github.io/husky/)
 
 `README.md` - application's documentation  
 `.prettierrc.json`, `.eslint.config.mjs` - configuration files for [Prettier](https://prettier.io/) and [ESLint](https://eslint.org/) code formatters  
-`package.json` - configuration file for [npm](https://www.npmjs.com/)  
+`package.json` - project's configuration file    
 `webpack.config.mjs` - configuration file for [webpack](https://webpack.js.org/)
